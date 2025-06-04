@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Linux Retro!</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #000;
+            color: #00ff00;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden; /* Para ocultar elementos fuera de la pantalla inicial */
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff00;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px #0f0;
+            animation: flicker 1s infinite alternate;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .retro-button {
+            background-color: #222;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 3px 3px #0f0;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.1s ease-in-out;
+        }
+
+        .retro-button:hover {
+            transform: scale(1.05);
+        }
+
+        .retro-button::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #0f0, #000, #0f0, #000);
+            z-index: -1;
+            border-radius: 7px;
+            background-size: 300%;
+            animation: glowing 5s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 100% {
+                opacity: 0.8;
+                text-shadow: 2px 2px #0f0;
+            }
+            50% {
+                opacity: 1;
+                text-shadow: 2px 2px #0f0, -2px -2px #0f0;
+            }
+        }
+
+        @keyframes glowing {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 300% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        /* Animaciones de "scanlines" */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.9) 0px,
+                rgba(0, 0, 0, 0.9) 2px,
+                rgba(0, 255, 0, 0.1) 3px,
+                rgba(0, 0, 0, 0.9) 4px
+            );
+            z-index: -2;
+            pointer-events: none;
+            animation: scanlines 0.2s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(10px);
+            }
+        }
+
+        /* Animación de cursor parpadeante */
+        h1::after {
+            content: '_';
+            margin-left: 5px;
+            animation: blink-cursor 0.7s infinite;
+        }
+
+        @keyframes blink-cursor {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Bienvenido al Mundo Linux!</h1>
+        <div class="button-container">
+            <a href="TUTORIAL CONCEPTOS BASICOS EN LINUX (INCLUYENDO PERMISOS Y PRIVILEGIOS).pdf" class="retro-button">TUTORIAL CONCEPTOS BÁSICOS USUARIOS LINUX</a>
+            <a href="TUTORIAL COMPARTIR CARPETAS EN RED EN LINUX.pdf" class="retro-button">TUTORIAL COMPARTIR CARPETAS EN RED EN LINUX</a>
+            <a href="TUTORIAL SOBRE TODO LO RELACIONADO CON LO BASICO EN LA POSTINSTALACION EN LINUX.pdf" class="retro-button">TUTORIAL BÁSICO POSTINSTALACION LINUX</a>
+        </div>
+    </div>
+
+    <script>
+        // Pequeña animación de "carga" al inicio
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.container');
+            container.style.opacity = 0;
+            setTimeout(() => {
+                container.style.transition = 'opacity 1s ease-in-out';
+                container.style.opacity = 1;
+            }, 500);
+        });
+    </script>
+</body>
+</html>
